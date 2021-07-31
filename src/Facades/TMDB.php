@@ -62,14 +62,15 @@ class TMDB
      * 
      * @param string $type This can be 'tv' or 'movie'
      * @param string|array $information A single string of information or an 
-     * associative array to do a more complex search.
+     * associative array to do a more complex search, e.g = page number, region 
+     * or language
      * 
      * @return object Information found it.
      *  
      * @see https://developers.themoviedb.org/3/movies/get-top-rated-movies
      * @see https://developers.themoviedb.org/3/tv/get-top-rated-tv
      */
-    public function getTop(string $type, string|array $information): object
+    public function getTop(string $type, string|array $information = null): object
     {
         if (!is_array($information)) {
             return $this->getData("{$type}/top_rated", ['query' => $information]);
