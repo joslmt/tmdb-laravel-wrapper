@@ -137,6 +137,8 @@ class TMDB
      * @param int $page Number of page to search. By default start in the first 
      * page.
      * @param bool $include_adult Set to true no enable adult content.
+     * @param int $total Number of total async request to do.
+     * @param int $concurrency Number of simultaneous request.
      * 
      * @return array Information found it.
      * 
@@ -145,7 +147,7 @@ class TMDB
      * @see https://developers.themoviedb.org/3/search/search-tv-shows
      * @see Pool : https://docs.guzzlephp.org/en/stable/quickstart.html 
      */
-    public function searchAsync(string $type, string $query, int $page = 1, bool $include_adult = false): array
+    public function searchAsync(string $type, string $query, int $page = 1, bool $include_adult = false, int $total = 100, int $concurrency = 10): array
     {
         $client =  $this->client;
 
@@ -166,8 +168,8 @@ class TMDB
          */
         $data = [];
 
-        $pool = new Pool($client, $requests(100), [
-            'concurrency' => 10,
+        $pool = new Pool($client, $requests($total), [
+            'concurrency' => $concurrency,
             'fulfilled' => function (Response $response) use (&$data) {
                 $data = json_decode($response->getBody())->results;
             },
