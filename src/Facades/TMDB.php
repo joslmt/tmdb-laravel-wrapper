@@ -159,6 +159,7 @@ class TMDB
                 yield function () use ($client, $uri) {
                     return $client->getAsync($uri);
                 };
+                $page++;
             }
         };
 
