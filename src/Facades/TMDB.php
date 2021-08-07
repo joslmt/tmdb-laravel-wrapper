@@ -129,8 +129,7 @@ class TMDB
 
     /**
      * Search information about movies, tv shows or people. 
-     * Usefull to get all searched results using a loop to fetch results page 
-     * per page.
+     * By default return 2000 results.
      *
      * @param string $type This can be 'tv' or 'movie' or 'person'.
      * @param string $query What movie, tv o who person.
@@ -153,8 +152,10 @@ class TMDB
 
         $requests = function ($total) use ($client, $type, $query, $include_adult, $page) {
 
-            $uri = "search/{$type}?" . "api_key=" . config('tmdb.tmdb_key') . "&query={$query}&page={$page}&include_adult={$include_adult}";
             for ($i = 0; $i < $total; $i++) {
+
+                $uri = "search/{$type}?" . "api_key=" . config('tmdb.tmdb_key') . "&query={$query}&page={$page}&include_adult={$include_adult}";
+
                 yield function () use ($client, $uri) {
                     return $client->getAsync($uri);
                 };
