@@ -103,4 +103,19 @@ class TMDBTest extends TestCase
         $this->assertObjectHasAttribute('profile_path', $tmdb[0]);
         $this->assertObjectHasAttribute('known_for', $tmdb[0]);
     }
+
+    /**
+     * @test
+     */
+    public function return_an_object_of_arrays_with_discovered_movies()
+    {
+        $tmdb = \TMDB::moviesDiscover([
+            'without_genres' => 28,
+            'year' => '2020'
+        ]);
+        $this->assertIsObject($tmdb);
+        $this->assertIsArray($tmdb->results);
+        $this->assertObjectHasAttribute('title', $tmdb->results[0]);
+        $this->assertObjectHasAttribute('overview', $tmdb->results[0]);
+    }
 }

@@ -190,4 +190,19 @@ class TMDB
 
         return $data;
     }
+
+    /**
+     * Discover movies with different types of filters or sorting options, it's 
+     * a good way to generate random filtered movies for example.
+     * 
+     * @param string|array $information Value or values to discover new movies.
+     * 
+     * @return object
+     * 
+     * @see https://developers.themoviedb.org/3/discover/movie-discover
+     */
+    public function moviesDiscover(string|array $information): object
+    {
+        return $this->getData('discover/movie/', $information);
+    }
 }
