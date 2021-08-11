@@ -90,6 +90,14 @@ And add our api key from [The Movie Database](https://developers.themoviedb.org/
 \TMDB::searchAsync('person', 'tom'));
 ```
 
+:point_right: Discover new movies with the follow method, it's also provided with many filter and sorting options, an example of use.
+```
+\TMDB::movieDiscover(
+    'without_genres' => 28,
+    'year' => '2020'
+);
+```
+
 ## Testing :heavy_check_mark:
 
 This package provides tests to get more confident using the package and check if it's possible to add a new feature without broke nothing valuable.
