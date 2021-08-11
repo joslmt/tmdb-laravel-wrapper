@@ -11,7 +11,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $app['config']->set(
             'tmdb.tmdb_key',
-            env('TMDB_KEY', 'c946ac012e6ccfc95b990dbd6c9bc18d')
+            env('TMDB_KEY', '')
         );
     }
 
